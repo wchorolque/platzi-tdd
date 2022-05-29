@@ -8,15 +8,8 @@ use Tests\TestCase;
 
 class RepositoryControllerTest extends TestCase
 {
-    /**
-     * A basic feature test example.
-     *
-     * @return void
-     */
-    public function test_example()
+    public function test_guest()
     {
-        $response = $this->get('/');
-
-        $response->assertStatus(200);
+        $this->get('repositories')->assertRedirect('login');
     }
 }
