@@ -6,8 +6,12 @@ use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
 
+use App\Models\User;
+
 class RepositoryControllerTest extends TestCase
 {
+    use WithFaker, RefreshDatabase;
+
     public function test_guest()
     {
         // index
@@ -24,5 +28,21 @@ class RepositoryControllerTest extends TestCase
         $this->get('repositories/create')->assertRedirect('login');
         // guardar
         $this->post('repositories', [])->assertRedirect('login');
+    }
+
+    public function test_store()
+    {
+        $data = [
+            'url' => $this->faker->url,
+            'descripcion' => $this->faker->text,
+        ];
+
+        $user = User::factory()->create();
+        
+        $this->actingAs($user)
+            ->post('repositories', $data)
+            ->assertRedirect('repositories');
+
+        $this->assertDatabaseHas('repositories', $data);
     }
 }
