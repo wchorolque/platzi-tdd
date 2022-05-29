@@ -38,7 +38,7 @@ class RepositoryControllerTest extends TestCase
         ];
 
         $user = User::factory()->create();
-        
+
         $this->actingAs($user)
             ->post('repositories', $data)
             ->assertRedirect('repositories');
