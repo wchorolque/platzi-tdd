@@ -9,6 +9,11 @@ class RepositoryController extends Controller
 {
     public function store(Request $request)
     {
+        $request->validate([
+            'url' => 'required',
+            'description' => 'required'
+        ]);
+
         $request->user()->repositories()->create($request->all());
 
         return redirect()->route('repositories.index');
