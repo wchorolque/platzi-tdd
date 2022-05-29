@@ -21,6 +21,11 @@ class RepositoryController extends Controller
 
     public function update(Request $request, Repository $repository)
     {
+        $request->validate([
+            'url' => 'required',
+            'description' => 'required'
+        ]);
+        
         $repository->update($request->all());
 
         return redirect()->route('repositories.edit', $repository);
