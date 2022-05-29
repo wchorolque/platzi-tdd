@@ -60,7 +60,7 @@ class RepositoryControllerTest extends TestCase
 
         $this->actingAs($user)
             ->put("repositories/$repository->id", $data)
-            ->assertRedirect("repositories/$repository->id");
+            ->assertRedirect("repositories/$repository->id/edit");
 
         $this->assertDatabaseHas('repositories', $data);
     }
