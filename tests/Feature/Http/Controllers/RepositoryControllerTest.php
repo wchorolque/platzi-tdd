@@ -86,4 +86,22 @@ class RepositoryControllerTest extends TestCase
             ->assertStatus(302)
             ->assertSessionHasErrors(['url', 'description']);
     }
+
+    public function test_destroy()
+    {
+        //$this->withoutExceptionHandling();
+        $repository = Repository::factory()->create();
+
+        $user = User::factory()->create();
+
+        $this->actingAs($user)
+            ->delete("repositories/$repository->id")
+            ->assertRedirect("repositories");
+
+        $this->assertDatabaseMissing('repositories', [
+            'id' => $repository->id,
+            'url' => $repository->url, 
+            'description' => $repository->description
+        ]);
+    }
 }
