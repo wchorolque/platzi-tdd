@@ -2,17 +2,15 @@
 
 namespace Tests\Unit\Models;
 
-use PHPUnit\Framework\TestCase;
+use App\Models\Repository;
+use App\Models\User;
+use Tests\TestCase;
 
 class RepositoryTest extends TestCase
 {
-    /**
-     * A basic unit test example.
-     *
-     * @return void
-     */
-    public function test_example()
+    public function test_belongs_to_user()
     {
-        $this->assertTrue(true);
+        $repository = Repository::factory()->create();
+        $this->assertInstanceOf(User::class, $repository->user);
     }
 }
