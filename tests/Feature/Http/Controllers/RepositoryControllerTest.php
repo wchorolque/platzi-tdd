@@ -34,7 +34,7 @@ class RepositoryControllerTest extends TestCase
     {
         $data = [
             'url' => $this->faker->url,
-            'descripcion' => $this->faker->text,
+            'description' => $this->faker->text,
         ];
 
         $user = User::factory()->create();
