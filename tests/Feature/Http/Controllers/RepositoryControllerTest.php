@@ -63,6 +63,21 @@ class RepositoryControllerTest extends TestCase
         $this->assertDatabaseHas('repositories', $data);
     }
 
+    public function test_update_policy()
+    {
+        $user = User::factory()->create(); // id = 1
+        $repository = Repository::factory()->create(); // id = 2
+
+        $data = [
+            'url' => $this->faker->url,
+            'description' => $this->faker->text,
+        ];
+
+        $this->actingAs($user)
+            ->put("repositories/$repository->id", $data)
+            ->assertStatus(403);
+    }
+
     public function test_validate_store()
     {
         $user = User::factory()->create();
@@ -103,19 +118,13 @@ class RepositoryControllerTest extends TestCase
         ]);
     }
 
-    public function test_policy()
+    public function test_destroy_policy()
     {
         $user = User::factory()->create(); // id = 1
         $repository = Repository::factory()->create(); // id = 2
 
-        $data = [
-            'url' => $this->faker->url,
-            'description' => $this->faker->text,
-        ];
-
-
         $this->actingAs($user)
-            ->put("repositories/$repository->id", $data)
+            ->delete("repositories/$repository->id")
             ->assertStatus(403);
     }
 }
