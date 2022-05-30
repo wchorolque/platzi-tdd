@@ -102,10 +102,8 @@ class RepositoryControllerTest extends TestCase
 
     public function test_destroy()
     {
-        //$this->withoutExceptionHandling();
-        $repository = Repository::factory()->create();
-
         $user = User::factory()->create();
+        $repository = Repository::factory()->create(['user_id' => $user->id]);
 
         $this->actingAs($user)
             ->delete("repositories/$repository->id")
