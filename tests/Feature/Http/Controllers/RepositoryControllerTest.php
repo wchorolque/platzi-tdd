@@ -104,4 +104,20 @@ class RepositoryControllerTest extends TestCase
             'description' => $repository->description
         ]);
     }
+
+    public function test_policy()
+    {
+        $user = User::factory()->create(); // id = 1
+        $repository = Repository::factory()->create(); // id = 2
+
+        $data = [
+            'url' => $this->faker->url,
+            'description' => $this->faker->text,
+        ];
+
+
+        $this->actingAs($user)
+            ->put("repositories/$repository->id", $data)
+            ->assertStatus(403);
+    }
 }
