@@ -49,14 +49,12 @@ class RepositoryControllerTest extends TestCase
 
     public function test_update()
     {
-        //$this->withoutExceptionHandling();
-        $repository = Repository::factory()->create();
+        $user = User::factory()->create();
+        $repository = Repository::factory()->create(['user_id' => $user->id]);
         $data = [
             'url' => $this->faker->url,
             'description' => $this->faker->text,
         ];
-
-        $user = User::factory()->create();
 
         $this->actingAs($user)
             ->put("repositories/$repository->id", $data)
