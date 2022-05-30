@@ -26,6 +26,10 @@ class RepositoryController extends Controller
             'description' => 'required'
         ]);
 
+        if ($request->user()->id != $repository->user_id) {
+            abort(403);
+        }
+
         $repository->update($request->all());
 
         return redirect()->route('repositories.edit', $repository);
