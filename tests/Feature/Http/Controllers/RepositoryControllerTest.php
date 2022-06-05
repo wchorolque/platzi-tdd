@@ -158,10 +158,10 @@ class RepositoryControllerTest extends TestCase
 
         $this
             ->actingAs($user)
-            ->put("repositories/$repository->id")
+            ->get("repositories/$repository->id")
             ->assertStatus(200)
-            ->assertSee($repository->id)
-            ->assertStatus($repository->url);
+            ->assertSee($repository->url)
+            ->assertSee($repository->description);
     }
 
     public function test_show_policy()
@@ -171,7 +171,7 @@ class RepositoryControllerTest extends TestCase
 
         $this
             ->actingAs($user)
-            ->put("repositories/$repository->id")
+            ->get("repositories/$repository->id")
             ->assertStatus(403);
     }
 }
