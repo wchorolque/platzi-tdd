@@ -7,7 +7,6 @@
         <title>Laravel</title>
         <link rel="stylesheet" href="{{ asset('css/app.css') }}">
     </head>
-    <body class="bg-gray-200">
         <div class="relative flex items-top justify-center min-h-screen bg-gray-100 dark:bg-gray-900 sm:items-center py-4 sm:pt-0">
             @if (Route::has('login'))
                 <div class="hidden fixed top-0 right-0 px-6 py-4 sm:block">
@@ -23,7 +22,8 @@
                 </div>
             @endif
         </div>
-
+        
+    <body class="bg-gray-200">
         <ul class="max-w-lg bg-white border-r border-gray-300 shadow-xl">
         @foreach($repositories as $repository)
         <li class="flex items-center text-black p-2 hover:bg-gray-300">
@@ -36,7 +36,7 @@
                     <h2 class="text-sm font-semibold text-black">{{ $repository->url }}</h2>
                     <p>{{ $repository->description }}</p>
                 </div>
-                <span class="text-xs font-medium text-gray-600">{{ $repository->created_at }}</span>
+                <span class="text-xs font-medium text-gray-600">{{ $repository->created_at->diffForHumans() }}</span>
             </div>
         </li>
         @endforeach
