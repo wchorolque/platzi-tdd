@@ -40,7 +40,8 @@
                                 <form action="{{ route('repositories.destroy', $repo) }}" method="POST">
                                     @csrf
                                     @method('DELETE')
-                                    <input type="submit" value="eliminar" class="px-4 rounded-md bg-red-500 text-white">
+                                    <input type="submit" value="eliminar" class="px-4 rounded-md bg-red-500 text-white"
+                                    onclick="return confirm('Eliminar el registro')">
                                 </form>
                             </td>
                         </tr>
