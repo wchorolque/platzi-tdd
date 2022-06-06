@@ -10,7 +10,7 @@ class PageController extends Controller
     public function home()
     {
         return view('welcome', [
-            'repositories' => Repository::get()
+            'repositories' => Repository::with('user')->get()
         ]);
     }
 }
