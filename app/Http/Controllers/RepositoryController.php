@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\Repository;
 use Illuminate\Http\Request;
 
+use App\Http\Requests\RepositoryRequest;
+
 class RepositoryController extends Controller
 {
     public function index(Request $request)
@@ -37,25 +39,15 @@ class RepositoryController extends Controller
         return view('repositories.create');
     }
 
-    public function store(Request $request)
+    public function store(RepositoryRequest $request)
     {
-        $request->validate([
-            'url' => 'required',
-            'description' => 'required'
-        ]);
-
         $request->user()->repositories()->create($request->all());
 
         return redirect()->route('repositories.index');
     }
 
-    public function update(Request $request, Repository $repository)
+    public function update(RepositoryRequest $request, Repository $repository)
     {
-        $request->validate([
-            'url' => 'required',
-            'description' => 'required'
-        ]);
-
         if ($request->user()->id != $repository->user_id) {
             abort(403);
         }

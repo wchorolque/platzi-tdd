@@ -13,7 +13,7 @@ class RepositoryRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -24,7 +24,8 @@ class RepositoryRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            'url' => 'required',
+            'description' => 'required',
         ];
     }
 }
